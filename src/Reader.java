@@ -35,6 +35,20 @@ public class Reader {
 			}
 			b[i] = scanner.nextInt();
 		}
-		output = scanner.next();
+		//output = scanner.next();
 	}
+
+	public int[] getB() {
+		return b;
+	}
+
+	public int[][] getA1() {
+		return A1;
+	}
+
+	public int[][] getA2() {
+		return A2;
+	}
+	
+	
 }
