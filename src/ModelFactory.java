@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class ModelFactory {
 
-	// int nrOfQuestions;
+	
 
 	public ModelFactory() {
 		// this.nrOfQuestions = nrOfQuestions;
@@ -21,24 +21,23 @@ public class ModelFactory {
 		return models;
 	}
 
-	
-	/**
-	 * int input = 15;
-			int binarySize = 8;
-
-		    int[] bits = new int[binarySize];
-		    for (int i = 0 ; i < binarySize; i++) {
-		        bits[binarySize-1-i] = (input & (1 << i)) != 0 ? 1 : 0;
-		    }
-
-		    System.out.println(input + " = " + Arrays.toString(bits));
-		    
-		    ModelFactory m = new ModelFactory();
-		    int[][] poep = m.createModels(20);
-		    for( int i=0 ; i<1000000 ;i++) {
-		    	 	System.out.println(i + " = " + Arrays.toString(poep[i]));
-		    }
+	public static void printSolution(int model1, int model2, int nrOfQuestions1, int nrOfQuestions2) {
+		String zeros1 ="";
+		String binary1 = Integer.toBinaryString(model1);
+		
+		for(int i=0; i< (nrOfQuestions1 - binary1.length()); i++) {
+			zeros1 = zeros1 + "0";
 		}
-	 */
+		
+		String zeros2 ="";
+		String binary2 = Integer.toBinaryString(model2);
+		
+		for(int i=0; i< (nrOfQuestions2 - binary2.length()); i++) {
+			zeros2 = zeros2 + "0";
+		}
+		
+		System.out.println(zeros1+binary1+zeros2+binary2);	
+	}
+	
 
 }

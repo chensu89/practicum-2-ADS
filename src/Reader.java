@@ -8,6 +8,8 @@ public class Reader {
 	private int[][] A2;
 	private int[] b;
 	private String output;
+	private int m1;
+	private int m2;
 
 	public Reader(Scanner scanner) {
 		this.scanner = scanner;
@@ -16,8 +18,8 @@ public class Reader {
 	public void readInput() {
 		n = scanner.nextInt();
 		int m = scanner.nextInt();
-		int m1 = m / 2;
-		int m2 = m - m1;
+		m1 = m / 2;
+		m2 = m - m1;
 
 		A1 = new int[n][m1];
 		A2 = new int[n][m2];
@@ -36,6 +38,14 @@ public class Reader {
 			b[i] = scanner.nextInt();
 		}
 		//output = scanner.next();
+	}
+
+	public int getM1() {
+		return m1;
+	}
+
+	public int getM2() {
+		return m2;
 	}
 
 	public int[] getB() {
