@@ -1,5 +1,6 @@
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -23,17 +24,22 @@ public class Main {
 	
 	static int currentSolutionA1;
 	static int currentSolutionA2;
-
+	static int nrRemoved;
+	static int[] b;
+	static ArrayList<Integer> indexRemoved1  = new ArrayList<Integer>(50000);
+	static ArrayList<Integer> indexRemoved2  = new ArrayList<Integer>(50000);
+	
 	public static void main(String[] args) throws FileNotFoundException {
 		Scanner scanner = new Scanner(System.in); 
-		//Scanner scanner = new Scanner(new File("test_1"));
 		Reader reader = new Reader(scanner);
 		reader.readInput();
 		int [][] A1 = reader.getA1();
 		int [][] A2 = reader.getA2();
-		int [] b  = reader.getB(); 
+		b  = reader.getB(); 
 		int [][] binaryList = ModelFactory.createModels(A1[0].length);
 		int [][] binaryList2 = ModelFactory.createModels(A2[0].length);
+		
+		
 	/**	
 		System.out.println("list b" );
 		System.out.println(Arrays.toString(b));
@@ -52,24 +58,30 @@ public class Main {
 		System.out.println();
 		**/
 		int [][] correctMatrix = numberCorrectMatrix(A1,binaryList, A1[0].length);
+		int[][] prunedMatrix = prune(correctMatrix);
 	/**	System.out.println("number of correct answers per student in A1");
 		for( int i=0 ; i<correctMatrix.length ;i++) {
 	    	 	System.out.println(i + " = " + Arrays.toString(correctMatrix[i]));
 		}
 		System.out.println();
 	**/	
+		
+		nrRemoved = -1;
+		
+		
 		int [][] correctMatrix2 =  numberCorrectMatrix(A2,binaryList2, A2[0].length);
+		int[][] prunedMatrix2 = prune(correctMatrix2);
 	/**	System.out.println("number of correct answers per student in A2");
 		for( int i=0 ; i<correctMatrix2.length ;i++) {
     	 		System.out.println(i + " = " + Arrays.toString(correctMatrix2[i]));
 		}
 	**/	System.out.println();
-		
+		System.out.println(nrRemoved);
 		int count = 0;
 		
-		for(int i=0; i<correctMatrix.length;i++){
-			for(int j=0; j<correctMatrix2.length;j++) {
-				if(compareScores(correctMatrix[i],correctMatrix2[j],b)) {
+		for(int i=0; i<prunedMatrix.length;i++){
+			for(int j=0; j<prunedMatrix2.length;j++) {
+				if(compareScores(prunedMatrix[i],prunedMatrix2[j],b)) {
 					currentSolutionA1 = i;
 					currentSolutionA2 = j;
 					count++;
@@ -84,13 +96,38 @@ public class Main {
 			
 	}
 	
+	private static int[][] prune(int[][] correctMatrix) {
+		int[][] prunedMatrix = new int[correctMatrix.length - nrRemoved][correctMatrix[0].length]; 
+		int index = 0;
+		for(int i=0; i < correctMatrix.length; i++) {
+			if(correctMatrix[i][0] != -1) {
+				prunedMatrix[index] = correctMatrix[i];
+				index++;
+			}
+		}
+		return prunedMatrix;
+	}
+
 	public static int [][] numberCorrectMatrix(int [][] matrix, int [][] binaryList, int numberOfQuestions) {
 		int [][] correctMatrix = new int [(int) Math.pow(2, (double) numberOfQuestions)][matrix.length];
 		for(int i = 0; i < binaryList.length; i++) {
 			for(int j = 0; j < matrix.length; j++) {
-				int correctAnswers = countCorrectAnswers(binaryList[i], matrix[j]);
-				correctMatrix[i][j] = correctAnswers;
-				correctMatrix[correctMatrix.length-i-1][j] = numberOfQuestions-correctAnswers;
+				int correctAnswer = countCorrectAnswers(binaryList[i], matrix[j]);
+				correctMatrix[i][j] = correctAnswer;
+				correctMatrix[correctMatrix.length-i-1][j] = numberOfQuestions-correctAnswer;
+				
+				if(correctAnswer > b[j]) {
+					correctMatrix[i][0] = -1;
+					indexRemoved1.add(i);
+					nrRemoved++;
+					
+				} else if(numberOfQuestions-correctAnswer > b[j]){
+					correctMatrix[correctMatrix.length-i-1][0] = -1;
+					indexRemoved2.add(correctMatrix.length-i-1);
+					nrRemoved++;
+				}
+				
+				
 			}
 		}
 		return correctMatrix;
