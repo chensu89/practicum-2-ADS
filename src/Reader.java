@@ -11,6 +11,10 @@ public class Reader {
 	private int m1;
 	private int m2;
 
+	public int getN() {
+		return n;
+	}
+
 	public Reader(Scanner scanner) {
 		this.scanner = scanner;
 	}
@@ -99,18 +103,6 @@ public class Reader {
 		b2[hds] = m - b2[hds];
 	}
 
-	private int HighestDeviationScoreIndex(int[] array) {
-		int index = 0;
-		int currentDeviation = 0;
-		for (int i = 0; i < array.length; i++) {
-			int deviation = Math.abs(array[i] - m / 2);
-			if(deviation > currentDeviation) {
-				index = i;
-				currentDeviation = deviation;
-			}
-		}
-		return index;
-	}
 
 	public int getM1() {
 		return m1;

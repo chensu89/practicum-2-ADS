@@ -59,7 +59,6 @@ public class VectorComparer {
 	}
 
 	public int getSecondHalfSolution() {
-		// TODO Auto-generated method stub
 		return secondHalfSolution;
 	}
 	

@@ -1,13 +1,8 @@
-import java.util.Arrays;
+
 
 public class ModelFactory {
 
 	
-
-	public ModelFactory() {
-		// this.nrOfQuestions = nrOfQuestions;
-	}
-
 	public static int[][] createModels(int nrOfQ){
 		
 		int nrOfModels = (int) Math.pow(2, (double) nrOfQ)/2;
@@ -20,8 +15,9 @@ public class ModelFactory {
 		}
 		return models;
 	}
-
-	public static void printSolution(int model1, int model2, int nrOfQuestions1, int nrOfQuestions2) {
+	
+	
+	public static String printSolution(int model1, int model2, int nrOfQuestions1, int nrOfQuestions2) {
 		String zeros1 ="";
 		String binary1 = Integer.toBinaryString(model1);
 		
@@ -36,7 +32,7 @@ public class ModelFactory {
 			zeros2 = zeros2 + "0";
 		}
 		
-		System.out.println(zeros1+binary1+zeros2+binary2);	
+		return zeros1+binary1+zeros2+binary2;	
 	}
 	
 
