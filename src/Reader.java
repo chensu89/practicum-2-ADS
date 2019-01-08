@@ -14,10 +14,18 @@ public class Reader {
 	public int getN() {
 		return n;
 	}
-
+	
+	
 	public Reader(Scanner scanner) {
 		this.scanner = scanner;
 	}
+	
+	/**
+	 * This function reads the input from System.in and converts it two matrices and the correct answer vector.
+	 * It also converts every students score to the lowest score possible by inverting the scores if that results
+	 * in a lower score. finally it puts the student with the lowest score at the first row of the matrices.
+	 *  
+	 */
 
 	public void readInput() {
 		n = scanner.nextInt();
@@ -45,6 +53,10 @@ public class Reader {
 		changesToLowestScore();
 		lowestStudentFirst(A1, A2, b);
 	}
+	
+	/**
+	 * changes the students score to the lowest score possible
+	 */
 
 	private void changesToLowestScore() {
 		for(int i=0; i < n; i++) {
@@ -53,15 +65,35 @@ public class Reader {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @return the amount of students
+	 */
 
 	public int getM() {
 		return m;
 	}
+	
+	/**
+	 * This function switches the student on top of the matrix with the lowest scoring one
+	 * 
+	 * @param A1 first half of questions matrix
+	 * @param A2 second half of questions matrix
+	 * @param b answer vector
+	 */
 
 	private void lowestStudentFirst(int[][] A1, int[][] A2, int[] b) {
 		int lsi = lowestScoreIndex(b);
 		placeStudentOnTop(A1, A2, b, lsi);
 	}
+	
+	/**
+	 * This function finds the index in the matrices of the student with the lowest possible score
+	 * 
+	 * @param b answer vector
+	 * @return
+	 */
 
 	private int lowestScoreIndex(int[] b) {
 		int index = 0;
@@ -74,6 +106,16 @@ public class Reader {
 		}
 		return index;
 	}
+	
+	/**
+	 * code for switching a student at a specified index with the student at the first index 
+	 * of the matrices
+	 * 
+	 * @param A1 first half of questions matrix
+	 * @param A2 second half of questions matrix
+	 * @param b answer vector
+	 * @param lsi index which of vector which is going to be switched
+	 */
 
 	private void placeStudentOnTop(int[][] A1, int[][] A2, int[] b, int lsi) {
 		if (lsi != 0) {
@@ -90,6 +132,15 @@ public class Reader {
 			b[lsi] = firstStudentB;
 		}
 	}
+	
+	/**
+	 * inverts a student score so ones become zeros and the other way around
+	 * 
+	 * @param A1 first half of questions matrix
+	 * @param A2 second half of questions matrix
+	 * @param b2 answer vector
+	 * @param hds index of student to be switched
+	 */
 
 	private void reverseStudentAnswers(int[][] A1, int[][] A2, int[] b2, int hds) {
 		for (int i = 0; i < A1[0].length; i++) {
@@ -102,7 +153,8 @@ public class Reader {
 
 		b2[hds] = m - b2[hds];
 	}
-
+	
+	// a few getters for the matrices answer vector and number of questions per matrix
 
 	public int getM1() {
 		return m1;

@@ -9,6 +9,17 @@ public class VectorComparer {
 	int secondHalfSolution;
 	int nrOfSolutions;
 	
+	/**
+	 * This class takes two vector lists and the students total scores and combines them to see if there are any that result 
+	 * in the same vector as the total scores.
+	 * 
+	 * @param vectorList1
+	 * @param vectorList2
+	 * @param indexList1
+	 * @param indexList2
+	 * @param scores
+	 */
+	
 	public VectorComparer(int[][][] vectorList1, int[][][] vectorList2, int[] indexList1, int[] indexList2, int[] scores) {
 		this.vectorList1 = vectorList1;
 		this.vectorList2 = vectorList2;
@@ -22,6 +33,10 @@ public class VectorComparer {
 	public int getNrOfSolutions() {
 		return nrOfSolutions;
 	}
+	
+	/**
+	 * this function starts the comparing of vectors
+	 */
 
 	private void totalCompare() {
 		int nrOfMatrices = vectorList1.length;
@@ -31,6 +46,15 @@ public class VectorComparer {
 			} 
 		}
 	}
+	
+	/**
+	 * The vector lists are of type int[][][] so an array of matrices. this function compares the vectors of a matrix of both vector lists
+	 * 
+	 * @param matrix1
+	 * @param matrix2
+	 * @param maxIndex1
+	 * @param maxIndex2
+	 */
 	
 	private void matrixCompare(int[][] matrix1, int[][] matrix2, int maxIndex1, int maxIndex2) {
 		for(int i=0; i< maxIndex1; i++) {
@@ -42,6 +66,14 @@ public class VectorComparer {
 		}
 	}
 	
+	/**
+	 * This function compares two vectors and looks if added together they create the score vector. if they don't
+	 * it returns false if they do it returns true.
+	 * 
+	 * @param vector1
+	 * @param vector2
+	 * @return
+	 */
 
 	private boolean compareVector(int[] vector1, int[] vector2) {
 		for(int i=1; i<vector1.length-1;i++) {		

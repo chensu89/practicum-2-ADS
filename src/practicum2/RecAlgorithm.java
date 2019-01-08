@@ -12,6 +12,15 @@ public class RecAlgorithm {
 	private int nrOfQuestions;
 	private int nrOfStudents;
 	
+	
+	/**
+	 * 
+	 * 
+	 * @param totalScores  
+	 * @param columnScores
+	 * @param nrOfStudents
+	 * @param nrOfQuestions
+	 */
 
 	public RecAlgorithm(int[] totalScores,int[][][] columnScores, int nrOfStudents, int nrOfQuestions) {
 		this.stack = new Stack<Path>();

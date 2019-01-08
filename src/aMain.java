@@ -1,9 +1,12 @@
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 public class aMain {
 
 	public static void main(String[] args) {
+		
+		// this part simply reads the input and creates the two matrices with the students answers
+		
 		Scanner scanner = new Scanner(System.in);
 		Reader reader = new Reader(scanner);
 		reader.readInput();
@@ -14,7 +17,8 @@ public class aMain {
 
 		int totalNrOfQuestions = reader.getM();
 		
-		
+		// if the total number of questions is 1 it uses the oneQuestion class to give the result
+		// if the number of questions is bigger it uses the vectorFactory and VectorComparer
 
 		if (totalNrOfQuestions == 1) {
 			if (b.length == 1) {
@@ -35,23 +39,6 @@ public class aMain {
 			int[][][] vectors2 = vectorFactory2.getVectors();
 			int[] indexList2 = vectorFactory2.getIndexList();
 
-			// System.out.println("nrOfmatrices1 = " + vectors1.length);
-			// System.out.println("nrOfmatrices2 = " + vectors2.length);
-
-			// System.out.println("length vector1 =" +vectors1.length );
-			// System.out.println("length vector1 =" +vectors2.length );
-
-			/**
-			 * for( int i=0 ; i<vectors1.length ;i++) { for( int j=0 ; j<vectors1[i].length
-			 * ;j++) { System.out.println(i + " " + j + " = " +
-			 * Arrays.toString(vectors1[i][j])); } }
-			 * 
-			 * 
-			 * for( int i=0 ; i<vectors2.length ;i++) { for( int j=0 ; j<vectors2[i].length
-			 * ;j++) { System.out.println(i + " = " + Arrays.toString(vectors2[i][j])); } }
-			 * 
-			 **/
-
 			VectorComparer vectorComparer = new VectorComparer(vectors1, vectors2, indexList1, indexList2, b);
 			int solutions = vectorComparer.getNrOfSolutions();
 			if (solutions != 1) {
@@ -62,22 +49,6 @@ public class aMain {
 				System.out.println(ModelFactory.printSolution(solution1, solution2, A1[0].length, A2[0].length));
 			}
 		}
-
-	}
-
-	private static void printOppositeArray(int[] is) {
-		for (int i = 0; i < is.length; i++) {
-			is[i] = (is[i] == 0) ? 1 : 0;
-		}
-		printArray(is);
-	}
-
-	private static void printArray(int[] is) {
-		String s = "";
-		for (int i = 0; i < is.length; i++) {
-			s = s + is[i];
-		}
-		System.out.println(s);
 
 	}
 }

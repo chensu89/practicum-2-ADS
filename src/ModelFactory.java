@@ -1,6 +1,15 @@
 
 
 public class ModelFactory {
+	
+	
+	/**
+	 * This function creates every possible answer model given a number of questions
+	 * 
+	 * @param nrOfQ the number of questions in a matrix
+	 * @return every possible answer model in the order of binary numbers
+	 * e.g. 000 , 010 , 011 etc
+	 */
 
 	
 	public static int[][] createModels(int nrOfQ){
@@ -16,6 +25,17 @@ public class ModelFactory {
 		return models;
 	}
 	
+	/**
+	 * this function turns two integers into two binary numbers and adds a padding of zeros
+	 * according to the number of questions.
+	 * 
+	 * @param model1 number 1 to be converted to binary
+	 * @param model2 number 2 to be converted to binary
+	 * @param nrOfQuestions1 
+	 * @param nrOfQuestions2
+	 * 
+	 * @return an answer model
+	 */
 	
 	public static String printSolution(int model1, int model2, int nrOfQuestions1, int nrOfQuestions2) {
 		String zeros1 ="";
