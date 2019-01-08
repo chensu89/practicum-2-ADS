@@ -2,7 +2,7 @@ package practicum2;
 
 import java.util.Stack;
 
-public class Algorithm {
+public class RecAlgorithm {
 
 	private Stack<Path> stack;
 	int[][][] columnScores;
@@ -13,7 +13,7 @@ public class Algorithm {
 	private int nrOfStudents;
 	
 
-	public Algorithm(int[] totalScores,int[][][] columnScores, int nrOfStudents, int nrOfQuestions) {
+	public RecAlgorithm(int[] totalScores,int[][][] columnScores, int nrOfStudents, int nrOfQuestions) {
 		this.stack = new Stack<Path>();
 		this.totalScores = totalScores;
 		this.columnScores = columnScores;
@@ -38,10 +38,24 @@ public class Algorithm {
 				addPathToStack(path,0, path.getIndex());
 				addPathToStack(path,1, path.getIndex());
 			} else {
-				currentSolution = path.getAnswerModel();
-				System.out.println(currentSolution);
-				nrOfSolutions += 1;
+				checkFinalPath2(path);
 			}
+		}
+	}
+
+	
+	
+	private void checkFinalPath2(Path path) {
+		boolean correct = true;
+		int[] parentArray = path.getParentArray();
+		for(int i = 0; i<nrOfStudents; i++) {
+			if(parentArray[i] != totalScores[i]) {
+				correct = false;
+			}
+		}
+		if(correct) {
+			currentSolution = path.getAnswerModel();
+			nrOfSolutions += 1;
 		}
 	}
 
@@ -58,13 +72,13 @@ public class Algorithm {
 		int [] newParentArray = new int[nrOfStudents];
 		int [] oldParentArray = path.getParentArray();
 		int [] answers = columnScores[i][currentAnswer];
-		for(int j=0; i < nrOfStudents; i++) {
-			int newValue = oldParentArray[j] + answers[i];
-			if(newValue > totalScores[i]) {
+		for(int j=0; j < nrOfStudents; j++) {
+			int newValue = oldParentArray[j] + answers[j];
+			if(newValue > totalScores[j]) {
 				newParentArray[0] = -1;
 				return newParentArray;
 			} else {
-				newParentArray[i] = newValue;
+				newParentArray[j] = newValue;
 			}
 		}
 		return newParentArray;

@@ -38,8 +38,27 @@ public class FinalReader {
 			}
 			columnScores[0] = zeroScores;
 			columnScores[1] = oneScores;
+			changeToLowestScore();
 			totalScores[i] = scanner.nextInt();
 		}		
+	}
+	
+	private void changeToLowestScore() {
+		for(int i=0; i < nrOfStudents; i++) {
+			if(totalScores[i] > nrOfQuestions/2){
+				reverseStudentAnswers(i);
+			}
+		}
+	}
+
+	private void reverseStudentAnswers(int i) {
+		totalScores[i] = nrOfQuestions - totalScores[i];
+		for(int j = 0; j < nrOfQuestions; j++) {
+			zeroScores[j][i] = (zeroScores[j][i]==0) ? 1 : 0;
+			oneScores[j][i] = (oneScores[j][i]==0) ? 1 : 0;
+		}
+		
+		
 	}
 
 	public int[][] getOneScores() {
